@@ -1,0 +1,49 @@
+// Level 1: Base class
+class Person {
+    protected String name;
+    
+    public Person(String name) {
+        this.name = name;
+    }
+    
+    public void introduce() {
+        System.out.println("I am " + name);
+    }
+}
+
+// Level 2: First derived class (Multilevel)
+class Student extends Person {
+    protected String studentId;
+    
+    public Student(String name, String studentId) {
+        super(name);
+        this.studentId = studentId;
+    }
+    
+    public void study() {
+        System.out.println(name + " (ID: " + studentId + ") is studying");
+    }
+}
+
+// Level 3: Second derived class
+class GraduateStudent extends Student {
+    private String thesisTopic;
+    
+    public GraduateStudent(String name, String studentId, String thesisTopic) {
+        super(name, studentId);
+        this.thesisTopic = thesisTopic;
+    }
+    
+    public void research() {
+        System.out.println(name + " is researching: " + thesisTopic);
+    }
+}
+
+public class AcademicHierarchy {
+    public static void main(String[] args) {
+        GraduateStudent grad = new GraduateStudent("Alice", "GS001", "AI");
+        grad.introduce();
+        grad.study();
+        grad.research();
+    }
+}
