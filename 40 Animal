@@ -1,0 +1,37 @@
+class Animal {
+    public void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Dog barks: Woof!");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Cat meows: Meow!");
+    }
+}
+
+public class RuntimePolymorphism {
+    public static void animalSound(Animal animal) {
+        animal.makeSound(); // Runtime decision
+    }
+    
+    public static void main(String[] args) {
+        Animal[] animals = {
+            new Dog(),
+            new Cat(),
+            new Animal()
+        };
+        
+        for (Animal animal : animals) {
+            animalSound(animal); // Dynamic method dispatch
+        }
+    }
+}
