@@ -1,0 +1,16 @@
+public class PerformanceAnalyzer {
+    public static int findMaxScore(int[] scores) {
+        int max = scores[0];
+        for (int i = 1; i < scores.length; i++) {
+            if (scores[i] > max) {
+                max = scores[i];
+            }
+        }
+        return max;
+    }
+    
+    public static void main(String[] args) {
+        int[] scores = {85, 92, 78, 95, 88};
+        System.out.println("Maximum score: " + findMaxScore(scores));
+    }
+}
