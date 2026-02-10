@@ -1,0 +1,29 @@
+class NetworkProcessor implements Runnable {
+    private String processName;
+    
+    public NetworkProcessor(String processName) {
+        this.processName = processName;
+    }
+    
+    @Override
+    public void run() {
+        for (int i = 0; i < 3; i++) {
+            System.out.println(processName + " processing packet " + (i + 1));
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println(processName + " interrupted");
+            }
+        }
+    }
+}
+
+public class RunnableDemo {
+    public static void main(String[] args) {
+        Thread network1 = new Thread(new NetworkProcessor("Server1"));
+        Thread network2 = new Thread(new NetworkProcessor("Server2"));
+        
+        network1.start();
+        network2.start();
+    }
+}
