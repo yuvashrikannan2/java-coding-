@@ -1,0 +1,17 @@
+public class SpaceRemover {
+    public static String removeSpaces(String str) {
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) != ' ') {
+                result += str.charAt(i);
+            }
+        }
+        return result;
+    }
+    
+    public static void main(String[] args) {
+        String text = "Hello World Java Programming";
+        System.out.println("Original: '" + text + "'");
+        System.out.println("No spaces: '" + removeSpaces(text) + "'");
+    }
+}
