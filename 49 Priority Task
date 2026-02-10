@@ -1,0 +1,38 @@
+class PriorityTask implements Runnable {
+    private String taskName;
+    
+    public PriorityTask(String taskName) {
+        this.taskName = taskName;
+    }
+    
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + 
+                             " [" + Thread.currentThread().getPriority() + 
+                             "] - " + taskName + " step " + (i + 1));
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+}
+
+public class PriorityEngine {
+    public static void main(String[] args) {
+        Thread highPriority = new Thread(new PriorityTask("CRITICAL"), "HighPrio");
+        Thread normalPriority = new Thread(new PriorityTask("Regular"), "NormPrio");
+        Thread lowPriority = new Thread(new PriorityTask("Background"), "LowPrio");
+        
+        // Set priorities (1=MIN, 5=NORM, 10=MAX)
+        highPriority.setPriority(Thread.MAX_PRIORITY);
+        normalPriority.setPriority(Thread.NORM_PRIORITY);
+        lowPriority.setPriority(Thread.MIN_PRIORITY);
+        
+        highPriority.start();
+        normalPriority.start();
+        lowPriority.start();
+    }
+}
