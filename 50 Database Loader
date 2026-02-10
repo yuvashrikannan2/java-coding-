@@ -1,0 +1,51 @@
+class DatabaseLoader extends Thread {
+    @Override
+    public void run() {
+        System.out.println("🔄 Loading database...");
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("Database loading step " + i + "/3");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        System.out.println("✅ Database ready!");
+    }
+}
+
+class AppStarter extends Thread {
+    private Thread dbLoader;
+    
+    public AppStarter(Thread dbLoader) {
+        this.dbLoader = dbLoader;
+    }
+    
+    @Override
+    public void run() {
+        try {
+            System.out.println("⏳ Waiting for database...");
+            dbLoader.join(); // Wait for DB to complete
+            System.out.println("🚀 Starting application...");
+            
+            for (int i = 1; i <= 2; i++) {
+                System.out.println("Application running phase " + i);
+                Thread.sleep(800);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+
+public class DependencySystem {
+    public static void main(String[] args) {
+        DatabaseLoader dbLoader = new DatabaseLoader();
+        AppStarter appStarter = new AppStarter(dbLoader);
+        
+        appStarter.start();  // Starts and waits for DB
+        dbLoader.start();    // DB runs concurrently
+        
+        System.out.println("Main thread continues...");
+    }
+}
