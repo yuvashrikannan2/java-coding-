@@ -1,0 +1,17 @@
+public class StatisticsGenerator {
+    public static void calculateStats(int[] arr) {
+        int sum = 0;
+        for (int num : arr) {
+            sum += num;
+        }
+        double average = (double) sum / arr.length;
+        
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + average);
+    }
+    
+    public static void main(String[] args) {
+        int[] values = {10, 20, 30, 40, 50};
+        calculateStats(values);
+    }
+}
