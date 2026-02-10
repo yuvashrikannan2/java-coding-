@@ -1,0 +1,21 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class FrequencyAnalyzer {
+    public static void countFrequency(int[] arr) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        
+        for (int num : arr) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+        }
+        
+        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+    
+    public static void main(String[] args) {
+        int[] data = {1, 2, 2, 3, 1, 4, 2};
+        countFrequency(data);
+    }
+}
