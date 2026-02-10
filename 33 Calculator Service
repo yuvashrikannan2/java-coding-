@@ -1,0 +1,35 @@
+public class CalculatorService {
+    
+    // Add two integers
+    public int add(int a, int b) {
+        return a + b;
+    }
+    
+    // Add three integers
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+    
+    // Add double values
+    public double add(double a, double b) {
+        return a + b;
+    }
+    
+    // Add array of integers
+    public int add(int[] numbers) {
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+        return sum;
+    }
+    
+    public static void main(String[] args) {
+        CalculatorService calc = new CalculatorService();
+        
+        System.out.println("2+3 = " + calc.add(2, 3));
+        System.out.println("2+3+4 = " + calc.add(2, 3, 4));
+        System.out.println("2.5+3.7 = " + calc.add(2.5, 3.7));
+        System.out.println("Array sum = " + calc.add(new int[]{1, 2, 3, 4}));
+    }
+}
