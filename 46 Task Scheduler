@@ -1,0 +1,29 @@
+class TaskScheduler extends Thread {
+    private String taskName;
+    
+    public TaskScheduler(String taskName) {
+        this.taskName = taskName;
+    }
+    
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(taskName + " - Step " + i);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                System.out.println(taskName + " interrupted");
+            }
+        }
+    }
+}
+
+public class ThreadDemo {
+    public static void main(String[] args) {
+        TaskScheduler task1 = new TaskScheduler("Backup");
+        TaskScheduler task2 = new TaskScheduler("Scan");
+        
+        task1.start();
+        task2.start();
+    }
+}
