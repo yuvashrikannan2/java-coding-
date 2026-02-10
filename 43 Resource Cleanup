@@ -1,0 +1,29 @@
+public class ResourceCleanup {
+    public static void processFile() {
+        java.io.FileReader file = null;
+        
+        try {
+            file = new java.io.FileReader("data.txt");
+            // Process file...
+            System.out.println("File processed successfully");
+            
+        } catch (java.io.FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+            
+        } finally {
+            // Always executes - cleanup
+            if (file != null) {
+                try {
+                    file.close();
+                    System.out.println("Resource cleaned up");
+                } catch (java.io.IOException e) {
+                    System.out.println("Cleanup error: " + e.getMessage());
+                }
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        processFile();
+    }
+}
