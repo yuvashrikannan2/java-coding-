@@ -1,0 +1,42 @@
+interface PaymentGateway {
+    boolean processPayment(double amount, String account);
+    String getPaymentMethod();
+}
+
+class CreditCardPayment implements PaymentGateway {
+    @Override
+    public boolean processPayment(double amount, String cardNumber) {
+        System.out.println("Processing $" + amount + " via Credit Card");
+        return cardNumber.startsWith("4"); // Visa check
+    }
+    
+    @Override
+    public String getPaymentMethod() {
+        return "Credit Card";
+    }
+}
+
+class UPIpayment implements PaymentGateway {
+    @Override
+    public boolean processPayment(double amount, String upiId) {
+        System.out.println("Processing $" + amount + " via UPI");
+        return upiId.contains("@");
+    }
+    
+    @Override
+    public String getPaymentMethod() {
+        return "UPI";
+    }
+}
+
+public class PaymentDemo {
+    public static void main(String[] args) {
+        PaymentGateway[] gateways = {
+            new CreditCardPayment(),
+            new UPIpayment()
+        };
+        
+        gateways[0].processPayment(999.99, "4111111111111111");
+        gateways[1].processPayment(499.99, "user@paytm");
+    }
+}
