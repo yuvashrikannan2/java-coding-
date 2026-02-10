@@ -1,0 +1,34 @@
+class BankAccount {
+    protected String accountNumber;
+    
+    public BankAccount(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+    
+    public void deposit(double amount) {
+        System.out.println("Depositing $" + amount + " to " + accountNumber);
+    }
+}
+
+class SavingsAccount extends BankAccount {
+    private double interestRate;
+    
+    public SavingsAccount(String accountNumber, double interestRate) {
+        super(accountNumber);
+        this.interestRate = interestRate;
+    }
+    
+    @Override
+    public void deposit(double amount) {
+        // Enhanced behavior - adds interest calculation
+        double total = amount + (amount * interestRate / 100);
+        System.out.println("Depositing $" + amount + " + interest = $" + total);
+    }
+}
+
+public class MethodOverridingDemo {
+    public static void main(String[] args) {
+        BankAccount account = new SavingsAccount("SAV123", 3.5);
+        account.deposit(1000); // Calls overridden method
+    }
+}
