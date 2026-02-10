@@ -1,0 +1,47 @@
+public class BankAccountSecure {
+    private String accountNumber;
+    private double balance;
+    private String pin;
+    
+    // Constructor
+    public BankAccountSecure(String accountNumber, double balance, String pin) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.pin = pin;
+    }
+    
+    // Getter methods
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+    
+    public double getBalance(String inputPin) {
+        if (verifyPin(inputPin)) {
+            return balance;
+        }
+        return -1; // Unauthorized access
+    }
+    
+    // Setter methods
+    public void deposit(double amount, String inputPin) {
+        if (verifyPin(inputPin)) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+        } else {
+            System.out.println("Invalid PIN!");
+        }
+    }
+    
+    private boolean verifyPin(String inputPin) {
+        return pin.equals(inputPin);
+    }
+}
+
+class EncapsulationDemo {
+    public static void main(String[] args) {
+        BankAccountSecure account = new BankAccountSecure("ACC123", 5000, "1234");
+        System.out.println("Balance: " + account.getBalance("1234"));
+        account.deposit(1000, "1234");
+        System.out.println("New Balance: " + account.getBalance("1234"));
+    }
+}
