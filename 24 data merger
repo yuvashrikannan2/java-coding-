@@ -1,0 +1,24 @@
+public class DataMerger {
+    public static int[] mergeArrays(int[] arr1, int[] arr2) {
+        int[] merged = new int[arr1.length + arr2.length];
+        int i = 0, j = 0, k = 0;
+        
+        while (i < arr1.length && j < arr2.length) {
+            merged[k++] = (arr1[i] < arr2[j]) ? arr1[i++] : arr2[j++];
+        }
+        
+        while (i < arr1.length) merged[k++] = arr1[i++];
+        while (j < arr2.length) merged[k++] = arr2[j++];
+        
+        return merged;
+    }
+    
+    public static void main(String[] args) {
+        int[] data1 = {1, 3, 5};
+        int[] data2 = {2, 4, 6};
+        int[] merged = mergeArrays(data1, data2);
+        
+        System.out.print("Merged: ");
+        for (int num : merged) System.out.print(num + " ");
+    }
+}
